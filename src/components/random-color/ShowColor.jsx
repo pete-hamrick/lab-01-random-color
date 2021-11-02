@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ColorRandomizer = ({ currentColor }) => {
+const ShowColor = ({ currentColor }) => {
   return (
     <div
       style={{
@@ -11,3 +11,5 @@ const ColorRandomizer = ({ currentColor }) => {
     ></div>
   );
 };
+
+export default ShowColor;
