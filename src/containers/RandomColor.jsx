@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import ShowColor from '../components/random-color/ShowColor';
+import ShowAngryBaby from '../components/random-color/AngryBaby';
 class RandomColor extends Component {
   state = {
     currentColor: 'blue',
-    // prevColor: 'brown',
+    prevColor: '',
   };
 
-  componentDidMount = (color) => {
-    this.myInterval = setInterval(() => {
-      this.setState({ currentColor: this.getRandomColor() });
+  componentDidMount = () => {
+    setInterval(() => {
+      this.setState({
+        prevColor: this.state.currentColor,
+        currentColor: this.getRandomColor(),
+      });
+      if (this.state.currentColor === this.state.prevColor)
+        this.setState({ currentColor: 'angry-baby' });
     }, 1000);
   };
 
@@ -30,11 +36,18 @@ class RandomColor extends Component {
     return `${colors[randomColor]}`;
   }
 
+  isBabyAngry() {
+    if (this.state.currentColor === 'angry-baby') {
+      return <ShowAngryBaby />;
+    }
+    return <ShowColor currentColor={this.state.currentColor} />;
+  }
+
   render() {
     return (
       <>
         <h1>Totally Random Colors!</h1>
-        <ShowColor currentColor={this.state.currentColor} />
+        {this.isBabyAngry()}
       </>
     );
   }
